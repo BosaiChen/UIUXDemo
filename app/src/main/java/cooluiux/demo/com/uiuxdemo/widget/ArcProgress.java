@@ -1,5 +1,6 @@
 package cooluiux.demo.com.uiuxdemo.widget;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -12,6 +13,9 @@ import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AnticipateOvershootInterpolator;
+
 import cooluiux.demo.com.uiuxdemo.utils.Utils;
 import cooluiux.demo.com.uiuxdemo.R;
 
@@ -20,6 +24,7 @@ public class ArcProgress extends View {
     protected Paint textPaint;
 
     private RectF rectF = new RectF();
+    private ValueAnimator animator;
 
     private float strokeWidth;
     private float suffixTextSize;
@@ -128,6 +133,33 @@ public class ArcProgress extends View {
         super.invalidate();
     }
 
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        animator = ValueAnimator.ofInt(0, 75);
+
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                int currentValue = (int) valueAnimator.getAnimatedValue();
+                setProgress(currentValue);
+            }
+        });
+
+        animator.setTarget(this);
+        animator.setInterpolator(new AnticipateOvershootInterpolator());
+        animator.setDuration(3000);
+        animator.setRepeatCount(3);
+        animator.setRepeatMode(ValueAnimator.REVERSE);
+        animator.start();
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        animator.cancel();
+    }
+
     public float getStrokeWidth() {
         return strokeWidth;
     }
@@ -164,7 +196,8 @@ public class ArcProgress extends View {
         if (this.progress > getMax()) {
             this.progress %= getMax();
         }
-        invalidate();
+//        invalidate();
+        postInvalidate();
     }
 
     public int getMax() {
@@ -273,7 +306,7 @@ public class ArcProgress extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        float startAngle = 270 - arcAngle / 2f;
+        float startAngle = 270;
         float finishedSweepAngle = progress / (float) getMax() * arcAngle;
         float finishedStartAngle = startAngle;
         paint.setColor(unfinishedStrokeColor);

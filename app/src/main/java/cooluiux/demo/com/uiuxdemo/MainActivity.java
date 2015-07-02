@@ -41,7 +41,7 @@ public class MainActivity extends ActionBarActivity {
         }, 1000, 100);*/
 
         //use ValueAnimator
-        ValueAnimator animator = ValueAnimator.ofInt(0, 100);
+        /*ValueAnimator animator = ValueAnimator.ofInt(0, 100);
 
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -56,7 +56,7 @@ public class MainActivity extends ActionBarActivity {
         animator.setDuration(5000);
         animator.setRepeatCount(3);
         animator.setRepeatMode(ValueAnimator.RESTART);
-        animator.start();
+        animator.start();*/
     }
 
 
@@ -86,6 +86,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onDestroy() {
         super.onDestroy();
 //        mTimer.cancel();
-        mAnimator.cancel();
+//        mAnimator.cancel();
     }
 }

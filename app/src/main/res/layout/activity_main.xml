@@ -1,14 +1,48 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/shadow"
+        android:padding="6dp">
+        <cooluiux.demo.com.uiuxdemo.widget.ArcProgress
+            android:id="@+id/arc_progress"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:arc_angle="360"
+            app:arc_finished_color="@color/yellow"
+            app:arc_unfinished_color="@android:color/white"
+            app:arc_text_size="14sp"
+            app:arc_suffix_text_size="10sp"
+            app:arc_suffix_text_padding="-2dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:text="Circular Progress Demo"
+            android:textSize="16sp"/>
+    </LinearLayout>
 
     <cooluiux.demo.com.uiuxdemo.widget.ArcProgress
-        android:id="@+id/arc_progress"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_centerInParent="true"/>
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="60dp"
+        app:arc_angle="360"
+        app:arc_finished_color="@color/yellow"
+        app:arc_unfinished_color="@android:color/white" />
 
-</RelativeLayout>
+</LinearLayout>
